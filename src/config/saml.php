@@ -30,7 +30,7 @@ return array(
     /*
      * The redirect destination after logging out
      */
-    'logout_target' => 'http://saml.dev',
+    'logout_target' => Request::root(),
 
     /*
      * Internal id property, defaults to email.
