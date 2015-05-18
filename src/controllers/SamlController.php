@@ -1,10 +1,5 @@
 <?php
 
-use \Saml;
-use \Auth;
-use \Session;
-use \Input;
-
 class SamlController extends \BaseController {
 
 	/*
