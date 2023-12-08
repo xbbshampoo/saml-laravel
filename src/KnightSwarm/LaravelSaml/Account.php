@@ -1,7 +1,7 @@
 <?php namespace KnightSwarm\LaravelSaml;
 
-
 use \Saml;
+use \User;
 use \Auth;
 use \Cookie;
 use \Config;
@@ -10,8 +10,7 @@ class Account {
 
     private $userClass;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->userClass = Config::get('laravel-saml::saml.sp_user_model_class');
     }
 
@@ -22,7 +21,6 @@ class Account {
     protected function getSamlIdProperty() {
         return Config::get('laravel-saml::saml.saml_id_property', 'email');
     }
-
     /**
      * Check if the id exists in the specified user property.
      * If no property is defined default to 'email'.
@@ -85,7 +83,6 @@ class Account {
     protected function fillUserDetails($user)
     {
          $mappings = Config::get('laravel-saml::saml.object_mappings',[]);
-
          foreach($mappings as $key => $mapping)
          {
              $user->{$key} = $this->getSamlAttribute($mapping);
@@ -95,13 +92,9 @@ class Account {
     public function createUser()
     {
         $user = new $this->userClass();
-
         $user->{$this->getUserIdProperty()} = $this->getSamlUniqueIdentifier();
-
         $this->fillUserDetails($user);
-
         $user->save();
-        
         $this->laravelLogin($user->{$this->getUserIdProperty()});
     }
 
@@ -109,9 +102,6 @@ class Account {
     {
         Auth::logout();
 
-        $auth_cookie = Cookie::forget('BuildSpaceAuthToken');
-
-        return $auth_cookie;
+        return Cookie::forget(Config::get('laravel-saml::saml.cookie_name', 'BuildSpaceAuthToken'));
     }
-
 }

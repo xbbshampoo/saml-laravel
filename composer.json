@@ -1,6 +1,6 @@
 {
     "name": "knight-swarm/laravel-saml",
-    "description": "saml auth provider for laravel 4.*",
+    "description": "saml auth provider for laravel 4.2 & 5.*",
     "keywords": ["saml", "laravel", "laravel-saml", "sso"],
     "license": "MIT",
     "authors": [
@@ -10,7 +10,7 @@
         },
         {
             "name": "Tom Mount",
-            "email": "tmountjr@ebay.com"
+            "email": "tmountjr@gmail.com"
         },
         {
             "name": "Phil Preston",
@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "~4.1"
+        "illuminate/support": ">=4.1"
     },
     "autoload": {
         "classmap": [

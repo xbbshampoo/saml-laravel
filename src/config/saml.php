@@ -18,6 +18,11 @@ return array(
     'sp_user_model_class' => '\User',
 
     /*
+     * SP Cookie Name
+     */
+    'cookie_name' => 'BuildSpaceAuthToken',
+
+    /*
      * The path to the working phpsimplesaml install
      */
     'sp_path' => "/var/simplesamlphp",
@@ -31,6 +36,14 @@ return array(
      * The redirect destination after logging out
      */
     'logout_target' => 'http://saml.dev',
+
+    /*
+     * The route slugs to use for the login and logout controller methods
+     */
+    'routes' => array(
+        'login' => 'login',
+        'logout' => 'logout',
+    ),
 
     /*
      * Internal id property, defaults to email.

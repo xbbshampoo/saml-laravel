@@ -1,11 +1,4 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: diego
- * Date: 21/03/14
- * Time: 00:25
- */
-
-Route::get('login', 'SamlController@login');
-Route::get('logout', 'SamlController@logout');
+Route::get(Config::get('laravel-saml::saml.routes.login', 'login'), 'SamlController@login');
+Route::get(Config::get('laravel-saml::saml.routes.logout', 'logout'), 'SamlController@logout');

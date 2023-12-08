@@ -1,31 +1,32 @@
 <?php
 
-use KnightSwarm\LaravelSaml\Account;
-use \Saml;
-use \Auth;
-use \Session;
 use \Input;
+use \Session;
+use \Auth;
+use \Config;
+use \Response;
+use \Redirect;
 
 class SamlController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Saml Controller
-	|--------------------------------------------------------------------------
-	|
-	| This Controller should handle users and auth through SAML
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Saml Controller
+    |--------------------------------------------------------------------------
+    |
+    | This Controller should handle users and auth through SAML
+    |
+    */
 
     private $act;
 
-    public function __construct(KnightSwarm\LaravelSaml\Account $act)
+    public function __construct(\KnightSwarm\LaravelSaml\Account $act)
     {
         $this->account = $act;
     }
 
-	public function login()
-	{
+    public function login()
+    {
         if (Input::has('url')) {
             // only allow local urls as redirect destinations
             $url = Input::get('url');
@@ -61,13 +62,11 @@ class SamlController extends BaseController {
             Session::flash('url.intended', $intended);
             return Redirect::intended('/');
         }
-
-	}
+    }
 
     public function logout()
     {
         $auth_cookie = $this->account->logout();
-		return Redirect::to(Config::get('laravel-saml::saml.logout_target', 'http://'.$_SERVER['SERVER_NAME']))->withCookie($auth_cookie);
+        return Redirect::to(Config::get('laravel-saml::saml.logout_target', 'http://'.$_SERVER['SERVER_NAME']))->withCookie($auth_cookie);
     }
-
 }
